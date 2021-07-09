@@ -21,3 +21,4 @@ dependencies:
     name: service
     service_name: zabbix-agent
     service_pkgs: "{{ zabbix_pkgs }}"
+    service_firewalld: []
