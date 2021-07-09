@@ -1,0 +1,16 @@
+---
+- name: "Set options in {{ zabbix_config['path'] }}"
+  ansible.builtin.replace:
+    path: "{{ zabbix_config['path'] }}"
+    owner: "{{ zabbix_config['owner'] }}"
+    group: "{{ zabbix_config['group'] }}"
+    mode: "{{ zabbix_config['mode'] }}"
+    setype: "{{ zabbix_config['setype'] }}"
+    regexp: "^{{ item['key'] }}=.*\\n"
+    # if value is empty => remove the whole line
+    replace: "{{ item['value'] | ternary(item['key']+'='+item['value']+'\n', omit) }}"
+    validate: 'zabbix_agentd -t system.hostname -c %s'
+  loop: "{{ zabbix_options | dict2items }}"
+  loop_control:
+    label: "{{ item['key'] }}={{ item['value'] | default('') }}"
+  notify: "Restart zabbix-agent service"

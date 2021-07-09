@@ -1,0 +1,6 @@
+zabbix_config:
+  path: /etc/zabbix/zabbix_agentd.conf
+  owner: "root"
+  group: "root"
+  mode: 0o644
+  setype: "etc_t"

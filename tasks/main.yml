@@ -1,0 +1,6 @@
+---
+- name: "Configure Zabbix"
+  tags:
+    - zabbix
+    - zabbix.config
+  ansible.builtin.import_tasks: config.yml
