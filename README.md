@@ -24,7 +24,7 @@ Role Variables
 * vars
 
   ```yaml
-  zabbix_config: {}     # sshd_config file attributes
+  zabbix_config: {}     # zabbix file attributes
   ```
 
 Dependencies
