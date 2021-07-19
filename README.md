@@ -19,6 +19,13 @@ Role Variables
     - name: ""          # RedHat Zabbix repo package
 
   zabbix_options: {}    # dict of Zabbix config key=value pairs
+    Server:             # list of values => coma separated in config
+      - zabbix-server
+      - 10.0.0.1
+    ServerActive:
+      - zabbix-server
+      - 10.0.0.1
+    Hostname: ""        # empty value => remove option in config
   ```
 
 * vars

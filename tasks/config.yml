@@ -7,7 +7,12 @@
     mode: "{{ zabbix_config['mode'] }}"
     setype: "{{ zabbix_config['setype'] }}"
     regexp: "^{{ item['key'] }}=.*"
-    line: "{{ item['key'] }}={{ item['value'] }}"
+    line: |-
+      {%- if item['value'] is sequence -%}
+      {{ item['key'] }}={{ item['value'] | join(',') }}
+      {%- elif item['value'] is string -%}
+      {{ item['key'] }}={{ item['value'] }}
+      {%- endif -%}
     insertafter: "# *{{ item['key'] }}=.*"
     # if value is empty => remove the whole line
     state: "{{ (item['value'] | length > 0) | ternary('present','absent') }}"
