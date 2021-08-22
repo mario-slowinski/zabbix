@@ -19,6 +19,6 @@ galaxy_info:
 dependencies:
   - src: https://github.com/mario-slowinski/service
     name: service
-    service_name: zabbix-agent
+    service_name: "{{ zabbix_service }}"
     service_pkgs: "{{ zabbix_pkgs }}"
     service_firewalld: []
