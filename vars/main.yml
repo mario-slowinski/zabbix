@@ -1,5 +1,6 @@
+---
 zabbix_config:
-  path: /etc/zabbix/zabbix_agentd.conf
+  path: "/etc/zabbix/{{ zabbix_service | regex_replace('-','_') }}.conf"
   owner: "root"
   group: "root"
   mode: 0o644

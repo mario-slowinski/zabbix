@@ -16,7 +16,7 @@
     insertafter: "# *{{ item['key'] }}=.*"
     # if value is empty => remove the whole line
     state: "{{ (item['value'] | length > 0) | ternary('present','absent') }}"
-    validate: 'zabbix_agentd -t system.hostname -c %s'
+    validate: "{{ zabbix_service | regex_replace('-','_') }} -t system.hostname -c %s"
   loop: "{{ zabbix_options | dict2items }}"
   loop_control:
     label: "{{ item['key'] }}={{ item['value'] }}"
