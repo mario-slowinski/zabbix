@@ -1,4 +1,5 @@
 ---
+Debian_service: "zabbix-agent"
 Debian_pkgs:
   - name: xz-utils
     state: latest

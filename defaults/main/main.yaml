@@ -1,4 +1,5 @@
 ---
+zabbix_service: "{{ lookup('vars', ansible_os_family+'_service') }}"
 zabbix_pkgs: "{{ lookup('vars', ansible_os_family+'_pkgs') }}"
 
 zabbix_options:

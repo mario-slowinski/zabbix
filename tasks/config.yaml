@@ -20,4 +20,4 @@
   loop: "{{ zabbix_options | dict2items }}"
   loop_control:
     label: "{{ item['key'] }}={{ item['value'] }}"
-  notify: "Restart service"
+  notify: "Restart zabbix-agent service"
