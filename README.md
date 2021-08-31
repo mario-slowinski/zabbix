@@ -13,20 +13,34 @@ Role Variables
 
 * defaults
 
-  ```yaml
-  zabbix_pkgs: []       # list of Zabbix repo and agent package
-    - deb: ""           # Debian Zabbix repo package
-    - name: ""          # RedHat Zabbix repo package
+  * `Debian.yaml`
 
-  zabbix_options: {}    # dict of Zabbix config key=value pairs
-    Server:             # list of values => coma separated in config
-      - zabbix-server
-      - 10.0.0.1
-    ServerActive:
-      - zabbix-server
-      - 10.0.0.1
-    Hostname: ""        # empty value => remove option in config
-  ```
+    ```yaml
+    Debian_pkgs: []       # list of Zabbix repo and agent packages
+      - deb: ""           # Debian Zabbix repo package URL
+      - name: ""          # zabbix-agent package
+    ```
+
+  * `RedHat.yaml`
+
+    ```yaml
+    RedHat_pkgs: []       # list of Zabbix repo and agent packages
+      - name: ""          # RedHat Zabbix repo package URL
+      - name: ""          # zabbix-agent package
+    ```
+
+  * `main.yaml`
+
+    ```yaml
+    zabbix_options: {}    # dict of Zabbix config key=value pairs
+      Server:             # list of values => coma separated in config
+        - zabbix-server
+        - 10.0.0.1
+      ServerActive:
+        - zabbix-server
+        - 10.0.0.1
+      Hostname: ""        # empty value => remove option in config
+    ```
 
 * vars
 
@@ -43,19 +57,19 @@ Dependencies
 Tags
 ----
 
-* zabbix.config
+* **zabbix.config** - Configure Zabbix
 
-Example Playbook
-----------------
+Examples
+--------
 
-* `requirements.yml`
+* `requirements.yaml`
 
   ```yaml
   - name: zabbix
     src: https://github.com/mario-slowinski/zabbix
   ```
 
-* playbook usage
+* `playbook.yaml`
 
   ```yaml
   - hosts: servers
