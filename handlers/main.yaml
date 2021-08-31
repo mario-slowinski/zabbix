@@ -1,0 +1,8 @@
+---
+- name: "Restart zabbix-agent service"
+  ansible.builtin.service:
+    name: "{{ zabbix_service }}"
+    state: restarted
+    enabled: true
+  become: true
+  when: test_dir is not defined
