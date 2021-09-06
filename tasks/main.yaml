@@ -1,6 +1,12 @@
 ---
-- name: "Configure Zabbix"
+- name: "Configure Zabbix Agent"
   tags:
     - zabbix
     - zabbix.config
   ansible.builtin.import_tasks: config.yaml
+
+- name: "Configure Zabbix Agent UserParameters"
+  tags:
+    - zabbix
+    - zabbix.userparameters
+  ansible.builtin.import_tasks: userparameters.yaml

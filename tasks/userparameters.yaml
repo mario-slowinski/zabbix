@@ -1,0 +1,18 @@
+---
+- name: "Set userparameters"
+  ansible.builtin.lineinfile:
+    path: "{{ item[0]['path'] }}"
+    owner: "{{ zabbix_config['owner'] }}"
+    group: "{{ zabbix_config['group'] }}"
+    mode: "{{ zabbix_config['mode'] }}"
+    setype: "{{ zabbix_config['setype'] }}"
+    regexp: "^UserParameter={{ item[1]['key'] }},.*"
+    line: "UserParameter={{ item[1]['key'] }},{{ item[1]['command'] }}"
+    # if value is empty => remove the whole line
+    state: "{{ (item[1]['command'] | length > 0) | ternary('present','absent') }}"
+    create: true
+    validate: "{{ zabbix_service | regex_replace('-','_') }} -t system.hostname -c %s"
+  loop: "{{ zabbix_userparameters | subelements('parameters') }}"
+  loop_control:
+    label: "{{ item[0]['path'] }} {{ item[1]['key'] }}={{ item[1]['command'] }}"
+  notify: "Restart zabbix-agent service"
