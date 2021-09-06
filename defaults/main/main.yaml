@@ -5,3 +5,9 @@ zabbix_pkgs: "{{ lookup('vars', ansible_os_family+'_pkgs') }}"
 zabbix_options:
   Server: 127.0.0.1
   Hostname: ""
+
+zabbix_userparameters:
+  - path: "{{ zabbix_config['path'] | regex_replace('conf','d') }}/userparameters.conf"
+    parameters:
+      - key: "ping"
+        command: "echo 1"
