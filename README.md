@@ -1,7 +1,7 @@
 zabbix
 ======
 
-Ansible role to configure Zabbix Agent.
+Ansible role to configure Zabbix Agent with UserParameters.
 
 Requirements
 ------------
@@ -16,36 +16,42 @@ Role Variables
   * `Debian.yaml`
 
     ```yaml
-    Debian_pkgs: []       # list of Zabbix repo and agent packages
-      - deb: ""           # Debian Zabbix repo package URL
-      - name: ""          # zabbix-agent package
+    Debian_pkgs: []  # list of Zabbix repo and agent packages
+      - deb: ""  # Debian Zabbix repo package URL
+      - name: ""  # zabbix-agent package
     ```
 
   * `RedHat.yaml`
 
     ```yaml
-    RedHat_pkgs: []       # list of Zabbix repo and agent packages
-      - name: ""          # RedHat Zabbix repo package URL
-      - name: ""          # zabbix-agent package
+    RedHat_pkgs: []  # list of Zabbix repo and agent packages
+      - name: ""  # RedHat Zabbix repo package URL
+      - name: ""  # zabbix-agent package
     ```
 
   * `main.yaml`
 
     ```yaml
-    zabbix_options: {}    # dict of Zabbix config key=value pairs
-      Server:             # list of values => coma separated in config
+    zabbix_options: {}  # dict of Zabbix config key=value pairs
+      Server:  # list of values => coma separated in config
         - zabbix-server
         - 10.0.0.1
       ServerActive:
         - zabbix-server
         - 10.0.0.1
-      Hostname: ""        # empty value => remove option in config
+      Hostname: ""  # empty value => remove option in config
+
+    zabbix_userparameters: []  # list of UserParametes files
+      - path: ""  # path, relative to zabbix_config.path
+        parameters: []  # list of UserParameters
+          - key: ""         
+            command: ""  # empty value => remove parameter
     ```
 
 * vars
 
   ```yaml
-  zabbix_config: {}     # zabbix file attributes
+  zabbix_config: {}  # zabbix file attributes
   ```
 
 Dependencies
@@ -57,7 +63,8 @@ Dependencies
 Tags
 ----
 
-* **zabbix.config** - Configure Zabbix
+* **zabbix.config** - Configure Zabbix Agent
+* **zabbix.userparameters** - Configure Zabbix Agent UserParameters
 
 Examples
 --------
